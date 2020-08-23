@@ -1,0 +1,128 @@
+<app-menu></app-menu>
+<app-mensagem ></app-mensagem>
+<h1 style="font-weight:normal" class="titulo">Cadastro de perfil</h1>
+<hr class="linha"/>
+<div class="ui-g">
+
+    <!----CAMPO PARA DIGITAR O perfil  ----------------------->
+  <div class="ui-g-12 ui-sm-12 ui-fluid">
+    <span class="ui-float-label">
+        <input type="text" class="inputDescricao" name="perfil" pInputText placeholder="perfil" [(ngModel)]="perfilDescricao" />
+        <label class=" labelDescricao" [hidden]="perfil ? false : true">perfil</label>
+    </span>
+  </div>
+    <!----BOTÃO ADICIONAR ---------------------------------->
+  <div>
+    <button
+      pButton type="button" label="Adicionar"  (click)="adicionar()" class="botaoAdicionar"
+    ></button>
+  </div>
+
+  <!--------------------------------------------------------->
+  <!--GRID PRINCIPAL ---------------------------------------->
+  <!--------------------------------------------------------->
+  <div class="ui-g-10 ui-sm-12 tabela" >
+    <div class="ui-g-12 ui-sm-12">
+      <p-table [value]="listaItens" [paginator]="true"  [rows]="15"  responsive="true"  [rowsPerPageOptions]="[15, 30, 60]"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="tb-item-cabecario-data ; " style="width: 400px;"
+            > Descrição </th>
+            <!-- <th class="tb-item-cabecario-cod ; " style="width: 20px;"
+            > E/S
+            </th>
+            <th class="tb-item-cabecario-cod ; " style="width: 80px;"
+            > Local Estoque
+            </th>
+            <th class="tb-item-cabecario-cod ; " style="width: 45px;"
+            > Código
+            </th>
+            <th class="tb-item-cabecario-desc ; " style="width: 300px;"
+            > Desc. Item
+            </th>
+            <th class="tb-item-cabecario-cod ; " style="width: 60px;"
+            > Nº Serie
+            </th>
+            <th class="tb-item-cabecario-qdte ; " style="width: 35px;"
+            > Qtde
+            </th> -->
+            <th class="tb-item-cabecario-cod ; " style="width: 70px;"
+            > Opções
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-t>
+          <tr>
+            <td class="tb-coluna-align-centro; "> {{ t.nome }}
+            </td>
+            <!-- <td class="tb-coluna-align-centro; "> {{ t.tipo }}
+            </td>
+            <td class="tb-coluna-align-centro; "> {{ t.localEstoque.descricao }}
+            </td>
+            <td class="tb-coluna-align-centro; "> {{ t.item.codigo }}
+            </td>
+            <td class="tb-coluna-align-centro; "> {{ t.item.descricao }}
+            </td>
+            <td class="tb-coluna-align-centro; "> {{ t.numSerie }}
+            </td>
+            <td class="tb-coluna-align-centro; "> {{ t.quantidade }} -->
+            <!-- </td> -->
+            <td class="tb-coluna-opcoes">
+              <button class="btn-tabela" (click)="controlaModal(t.id)" pButton icon="pi pi-pencil"
+                  pTooltip="Editar" tooltipPosition="top"></button>
+              <button class="botaoTabela" (click)="excluir(t)" pButton icon="pi pi-trash"
+                  pTooltip="Excluir" tooltipPosition="top"></button>
+          </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+
+  <!--------------------------------------------------------------------->
+  <!-- MODAL EDITAR ------------------------------------------------------>
+  <!---------------------------------------------------------------------->
+
+  <div class="ui-g-12 ui-sm-12">
+    <p-dialog
+      header="Alterar perfil"
+      [(visible)]="modalEditar"
+      [modal]="true"
+      [responsive]="true"
+      [baseZIndex]="150"
+      [style]="{ width: '30%' }"
+    >
+      <div>
+          <!----CAMPO PARA DIGITAR O perfil  ----------------------->
+          <div class="ui-g-12 ui-sm-12 ui-fluid">
+            <span class="ui-float-label">
+                <input type="text" class="inputDescricao" name="perfil" pInputText placeholder="perfil" [(ngModel)]="perfilDescricaoModal" />
+                <label class=" labelDescricao" [hidden]="perfil ? false : true">perfil</label>
+            </span>
+          </div>
+      </div>
+
+      <!--Botão Sim-->
+      <button
+        pButton
+        type="button"
+        label="Sim"
+        (click)="editar()"
+        style="width: 48%; margin-right: 12px; margin-top: 15px;"
+      ></button>
+
+      <!--Botão Não-->
+      <button
+        pButton
+        type="button"
+        label="Não"
+        (click)="modalEditar = false"
+        style="width: 48%;"
+      ></button>
+    </p-dialog>
+  </div>
+
+
+</div>

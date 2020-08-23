@@ -1,0 +1,37 @@
+.botaoAdicionar{
+  position: relative;
+  left: 15px;
+  width: 258px;
+}
+.titulo{
+  position: relative;
+  left: 15px;
+  top: -8px;
+  width: 90%;
+}
+.linha{
+  width: 98%;
+  position: relative;
+  top: -20px;
+}
+.tabela{
+    width: 78%;
+    position: relative;
+    left: 286px;
+    top: -92px;
+}
+.inputDescricao{
+  position: relative;
+  left: 15px;
+  top: -8px;
+  width: 260px;
+}
+.labelDescricao{
+  position: relative;
+    top: -38px;
+    left: -242px;
+}
+.botaoTabela{
+    position: relative;
+    left: 6px;
+}

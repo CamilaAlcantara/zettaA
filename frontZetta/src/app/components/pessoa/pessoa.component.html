@@ -1,0 +1,231 @@
+<app-menu></app-menu>
+<app-mensagem ></app-mensagem>
+<h1 style="font-weight:normal" class="titulo">Cadastro de pessoa</h1>
+<hr class="linha"/>
+<div class="ui-g">
+
+    <!----CAMPO PARA DIGITAR O pessoa  ----------------------->
+  <div class="ui-g-12 ui-sm-12 ui-fluid">
+    <span class="ui-float-label">
+        <input type="text" class="inputDescricao" name="pessoa" pInputText placeholder="pessoa" [(ngModel)]="pessoaDescricao" />
+        <label class=" labelDescricao" [hidden]="pessoa ? false : true">pessoa</label>
+    </span>
+  </div>
+    <!----BOTÃO ADICIONAR ---------------------------------->
+  <div>
+    <button
+      pButton type="button" label="Adicionar"  (click)="controlaModalAdicionar()" class="botaoAdicionar"
+    ></button>
+  </div>
+
+  <!--------------------------------------------------------->
+  <!--GRID PRINCIPAL ---------------------------------------->
+  <!--------------------------------------------------------->
+  <div class="ui-g-10 ui-sm-12 tabela" >
+    <div class="ui-g-12 ui-sm-12">
+      <p-table [value]="listaItens" [paginator]="true"  [rows]="15"  responsive="true"  [rowsPerPageOptions]="[15, 30, 60]"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="tb-item-cabecario-data ; " style="width: 200px;"
+            > Descrição </th>
+             <th class="tb-item-cabecario-cod ; " style="width: 20px;"
+            > Sexo
+            </th>
+
+            <th class="tb-item-cabecario-cod ; " style="width: 80px;"
+            > CPF
+            </th>
+
+            <th class="tb-item-cabecario-cod ; " style="width: 45px;"
+            > Data Nascimento
+            </th>
+             <th class="tb-item-cabecario-cod ; " style="width: 70px;"
+            > Opções
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-t>
+          <tr>
+            <td class="tb-coluna-align-centro; "> {{ t.nome }}
+            </td>
+            <td class="tb-coluna-align-centro; "> {{ t.sexo }}
+            </td>
+            <td class="tb-coluna-align-centro; "> {{ t.cpf }}
+            </td>
+            <td class="tb-coluna-align-centro; "> {{ t.dataNascimento }}
+            </td>
+            <td class="tb-coluna-opcoes">
+              <button class="btn-tabela" (click)="controlaModal(t.id)" pButton icon="pi pi-pencil"
+                  pTooltip="Editar" tooltipPosition="top"></button>
+              <button class="botaoTabela" (click)="excluir(t)" pButton icon="pi pi-trash"
+                  pTooltip="Excluir" tooltipPosition="top"></button>
+          </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+
+  <!--------------------------------------------------------------------->
+  <!-- MODAL EDITAR ------------------------------------------------------>
+  <!---------------------------------------------------------------------->
+
+  <div class="ui-g-12 ui-sm-12">
+    <p-dialog
+      header="Alterar pessoa"
+      [(visible)]="modalEditar"
+      [modal]="true"
+      [responsive]="true"
+      [baseZIndex]="150"
+      [style]="{ width: '30%' }"
+    >
+      <div>
+          <!----CAMPO PARA DIGITAR O pessoa  ----------------------->
+          <div class="ui-g-12 ui-sm-12 ui-fluid">
+            <span class="ui-float-label">
+                <input type="text" class="inputDescricao" name="pessoa" pInputText placeholder="pessoa" [(ngModel)]="pessoaDescricaoModal" />
+                <label class=" labelDescricao" [hidden]="pessoa ? false : true">pessoa</label>
+            </span>
+          </div>
+
+          <!----CAMPO PARA DIGITAR O pessoa  ----------------------->
+          <div class="ui-g-12 ui-sm-12 ui-fluid">
+            <span class="ui-float-label">
+                <input type="text" class="inputDescricao" name="cpf" pInputText placeholder="CPF" [(ngModel)]="cpfDescricaoModal" min="1" max="11" />
+                <!-- <label class=" labelDescricao" [hidden]="cpf ? false : true">CPF</label> -->
+            </span>
+          </div>
+
+          <!----CAMPO PARA selecionar O sexo  ----------------------->
+          <div class="ui-g-2 ui-sm-12 ui-fluid">
+            <span class="ui-float-label">
+                <p-dropdown [options]="sexo" [showClear]="true" [(ngModel)]="sexoSelecionado"
+                    placeholder="Sexo" name="sexo"  [filter]="true"
+                    emptyFilterMessage="Nenhum Registro" resetFilterOnHide="true" appendTo="body"
+                    [baseZIndex]="250"></p-dropdown>
+                <!-- <label class="lbl-espaco-reservado" for="float-label"
+                    [hidden]="sexoSelecionado !=null ? false:true">Sexo</label> -->
+            </span>
+        </div>
+
+        <!----CAMPO PARA selecionar O data  ----------------------->
+        <div class="ui-g-12 ui-sm-12 ui-fluid">
+          <span class="ui-float-label">
+            <p-calendar [defaultDate]="dataNascimento" dateFormat="dd/mm/yy" [showIcon]="true" [inline]="false"
+              name="dataNascimentoPesquisa" [(ngModel)]="dataNascimento" [monthNavigator]="true" [yearNavigator]="true"
+              yearRange="1980:2030" placeholder="Data Nascimento*"  [showButtonBar]="true">
+            </p-calendar>
+            <!-- <label class="lbl-espaco-reservado" [hidden]="dataNascimento ? false : true">DataNascimento
+              Nascimento</label> -->
+          </span>
+        </div>
+
+
+
+
+
+      </div>
+
+      <!--Botão Sim-->
+      <button
+        pButton
+        type="button"
+        label="Sim"
+        (click)="editar()"
+        style="width: 48%; margin-right: 12px; margin-top: 15px;"
+      ></button>
+
+      <!--Botão Não-->
+      <button
+        pButton
+        type="button"
+        label="Não"
+        (click)="modalEditar = false"
+        style="width: 48%;"
+      ></button>
+    </p-dialog>
+  </div>
+
+   <!--------------------------------------------------------------------->
+  <!-- MODAL ADICIONAR ------------------------------------------------------>
+  <!---------------------------------------------------------------------->
+
+  <div class="ui-g-12 ui-sm-12">
+    <p-dialog
+      header="Adicionar pessoa"
+      [(visible)]="modalAdicionar"
+      [modal]="true"
+      [responsive]="true"
+      [baseZIndex]="150"
+      [style]="{ width: '30%' }"
+    >
+      <div>
+          <!----CAMPO PARA DIGITAR O pessoa  ----------------------->
+          <div class="ui-g-12 ui-sm-12 ui-fluid">
+            <span class="ui-float-label">
+                <input type="text" class="inputDescricao" name="pessoa" pInputText placeholder="pessoa" [(ngModel)]="pessoaDescricaoModal" />
+                <label class=" labelDescricao" [hidden]="pessoa ? false : true">pessoa</label>
+            </span>
+          </div>
+
+          <!----CAMPO PARA DIGITAR O pessoa  ----------------------->
+          <div class="ui-g-12 ui-sm-12 ui-fluid">
+            <span class="ui-float-label">
+                <input type="text" class="inputDescricao" name="cpf" pInputText placeholder="CPF" [(ngModel)]="cpfDescricaoModal"  />
+                <!-- <label class=" labelDescricao" [hidden]="cpf ? false : true">CPF</label> -->
+            </span>
+          </div>
+
+          <!----CAMPO PARA selecionar O sexo  ----------------------->
+          <div class="ui-g-2 ui-sm-12 ui-fluid">
+            <span class="ui-float-label">
+                <p-dropdown [options]="sexo" [showClear]="true" [(ngModel)]="sexoSelecionado"
+                    placeholder="Sexo" name="sexo"  [filter]="true"
+                    emptyFilterMessage="Nenhum Registro" resetFilterOnHide="true" appendTo="body"
+                    [baseZIndex]="250"></p-dropdown>
+                <!-- <label class="lbl-espaco-reservado" for="float-label"
+                    [hidden]="sexoSelecionado !=null ? false:true">Sexo</label> -->
+            </span>
+        </div>
+
+        <!----CAMPO PARA selecionar O data  ----------------------->
+        <div class="ui-g-12 ui-sm-12 ui-fluid">
+          <span class="ui-float-label">
+            <p-calendar [defaultDate]="dataNascimento" dateFormat="dd/mm/yy" [showIcon]="true" [inline]="false"
+              name="dataNascimentoPesquisa" [(ngModel)]="dataNascimento" [monthNavigator]="true" [yearNavigator]="true"
+              yearRange="1980:2030" placeholder="Data Nascimento*"  [showButtonBar]="true">
+            </p-calendar>
+            <!-- <label class="lbl-espaco-reservado" [hidden]="dataNascimento ? false : true">DataNascimento
+              Nascimento</label> -->
+          </span>
+        </div>
+
+
+
+
+
+      </div>
+
+      <!--Botão Sim-->
+      <button
+        pButton
+        type="button"
+        label="Sim"
+        (click)="adicionar()"
+        style="width: 48%; margin-right: 12px; margin-top: 15px;"
+      ></button>
+
+      <!--Botão Não-->
+      <button
+        pButton
+        type="button"
+        label="Não"
+        (click)="modalAdicionar = false"
+        style="width: 48%;"
+      ></button>
+    </p-dialog>
+  </div>
+
+</div>

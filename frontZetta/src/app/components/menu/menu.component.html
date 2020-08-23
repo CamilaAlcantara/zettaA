@@ -1,0 +1,21 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-sm-12">
+    <ng-container>
+      <div>
+        <nav class="navbar navbar-light bg-light navbarPersonalizada">
+           <p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="1000" >
+            <br>
+            <p-panelMenu #menu [model]="items" [style]="{'width':'300px', 'position': 'relative','left': '-2.5%'}"></p-panelMenu>
+
+          </p-sidebar>
+          <button pButton type="button" (click)="visibleSidebar1 = true" icon="pi pi-bars" class="botaoMenu"></button>
+
+        </nav>
+
+      </div>
+
+    </ng-container>
+  </div>
+</div>
+
+

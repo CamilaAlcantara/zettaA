@@ -1,0 +1,13 @@
+:host /deep/ p-sidebar{
+  background-color: gray !important;
+  color:white !important;
+}
+:host /deep/ p-sidebar-close{
+  background-color: gray !important;
+  color:white !important;
+}
+#body > app-root > p-sidebar > div{
+  background-color: gray !important;
+  color:white !important;
+}
+

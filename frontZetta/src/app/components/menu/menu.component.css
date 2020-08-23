@@ -1,0 +1,26 @@
+.texto1 {
+  font-size: 23px !important;
+}
+
+.navbarPersonalizada {
+  background-color: black !important;
+  color: white !important;
+}
+
+.botaoMenu {
+  position: relative !important;
+  left: -98% !important;
+  background-color: black !important;
+  border-color: black !important;
+}
+
+.p-button:enabled:hover {
+  background: #b8b894 !important;
+  color: black !important;
+  border-color: #b8b894 !important;
+}
+.p-button:enabled:active {
+  background: #b8b894 !important;
+  color: black !important;
+  border-color: #b8b894 !important;
+}
