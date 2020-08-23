@@ -14,44 +14,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zettaApp.apiZetta.models.Cargo;
-import com.zettaApp.apiZetta.repository.CargoRepository;
+import com.zettaApp.apiZetta.models.Pessoa;
+import com.zettaApp.apiZetta.repository.PessoaRepository;
+
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping(value="/cargo")
-public class CargoResource {
+@RequestMapping(value="/pessoa")
+public class PessoaResource {
 
 	@Autowired
-	CargoRepository cargoRepository;
+	PessoaRepository pessoaRepository;
 	
 	
 	@GetMapping("/listar")
-	public List<Cargo> ListarCargo(){
-		return cargoRepository.findAll();
+	public List<Pessoa> listarPessoa(){
+				
+		return pessoaRepository.findAll();
 	}
 	@GetMapping("/pesquisar")
-	public List<Cargo> listar(){
-		return cargoRepository.getListar();
+	public List<Pessoa> listar(){
+		return pessoaRepository.getListar();
 	}
-	
 	@GetMapping("/buscarPorId/{id}")
-	public Optional<Cargo> buscarPorId(@PathVariable("id") long id){
-	 		return this.cargoRepository.findById(id);
+	public Optional<Pessoa> pesquisar(@PathVariable("id") long id){
+	 		return this.pessoaRepository.findById(id);
 	}
 	
 	@PostMapping("/incluir")
-	public Cargo incluir(@RequestBody Cargo entity) {
-		return this.cargoRepository.save(entity);
+	public Pessoa incluir(@RequestBody Pessoa entity) {
+		return this.pessoaRepository.save(entity);
 	}
 	
 	@PutMapping("/alterar")
-	public Cargo alterar(@RequestBody Cargo entity) {
-		return this.cargoRepository.save(entity);
+	public Pessoa alterar(@RequestBody Pessoa entity) {
+		return this.pessoaRepository.save(entity);
 	}
 	
 	@DeleteMapping("/delete")
-	public void delete(@RequestBody Cargo entity) {
-		 this.cargoRepository.delete(entity);
+	public void delete(@RequestBody Pessoa entity) {
+		 this.pessoaRepository.delete(entity);
 	}
 	
 

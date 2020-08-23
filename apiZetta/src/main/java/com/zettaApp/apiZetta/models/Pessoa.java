@@ -1,7 +1,7 @@
 package com.zettaApp.apiZetta.models;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat(pattern="yyyy-MM-dd")
 @Entity
 @Table(name="TB_PESSOA")
 public class Pessoa implements Serializable {
